@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="col-md-12 profileBox text-center">
+	  	<div class="profilePic"><img src="{{profile.profilePic}}" class="img-responsive img-thumbnail"></div>
+	  	<div class="userInfo"><h3>{{profile.name}}</h3></div><hr>
+		</div>
+		<div class="text-center">
+			<h4 style="text-decoration: underline">Collections</h4>
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="col-md-12"></div>
+					<ul class="collectionsList text-left">
+					  <li ng-repeat="collection in collections">
+							<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
+					  </li>
+					</ul>
+				</div>
+			</div>
+	</div>
+	<div class="col-md-9">
+		<div class="col-md-12 text-center">
+			<div class="form-group">
+			  <label class="control-label" for="inputDefault"><h4>Add a New Collection</h4></label>
+			  <form ng-submit="collectionPost(colName)">
+			  	<input type="text" placeholder="Enter Hashtag Name" class="form-control" id="inputDefault" ng-model="colName">
+			  </form>
+			</div>
+			<div class="col-md-3" ng-repeat="collection in collections | filter: individualSearch">
+				<div class="collectionTitle text-center"><h3><a href="/#/collections/{{collection.name}}">#{{collection.name}}</a></h3></div>
+				<div class="collectionPreview text-center">
+					Preview Here
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-9"></div>
+</div>

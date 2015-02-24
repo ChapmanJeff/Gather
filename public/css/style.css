@@ -1,0 +1,55 @@
+/** {
+	outline: 1px solid red;
+}*/
+
+
+.instaBoxContainer {
+	height: 25%;
+	width: 25%;
+	margin: 0;
+	padding: 3px;
+}
+
+.instaBox {
+	height: 70%;
+}
+
+.instaBox img {
+	border: 3px solid #2AA1E6;
+/*	border-radius: 100%;*/
+}
+
+.tagSite {
+	height: 30%;
+}
+
+/*.enlarge:hover {
+	transform:scale(2,2);
+	transform-origin:0 0;
+}*/
+
+.profileBox {
+	/*background: #D9EDF7;*/
+	border-radius: 5%;
+	/*border: 3px solid #2AA1E6;*/
+}
+
+.profilePic {
+	border-radius: 5%;
+	/*border: 3px solid #044788;;*/
+}
+
+.userInfo {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.collectionsList {
+	list-style-type: none;
+	padding: 0;
+}
+
+
+
+
