@@ -47,6 +47,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        <li><img src="{{profile.profilePic}}" ng-show="profile" class="profileDot img-responsive img-circle"></li>
         <li><a href="/api/logout" ng-show="profile">Logout</a></li>
         <li><a href="/#/" ng-show="!profile">Login</a></li>
       </ul>
@@ -61,7 +62,8 @@
 	<script src="/js/app.js"></script>
 	<script src="/js/mainCtrl.js"></script>
 	<script src="/js/templates/home/homeCtrl.js"></script>
-	<script src="/js/templates/collections/collectionsCtrl.js"></script>
+  <script src="/js/templates/collections/collectionsCtrl.js"></script>
+	<script src="/js/templates/collections/collectCtrl.js"></script>
 	<script src="/js/templates/home/homeService.js"></script>
 	<script src="/js/templates/collections/collectionsService.js"></script>
 	<script src="/js/mainService.js"></script>

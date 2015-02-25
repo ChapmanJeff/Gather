@@ -2,6 +2,7 @@ var app = angular.module('gather');
 
 app.controller('collectionsCtrl', function ($scope, mainService) {
 
+
 // $scope.sortedInfo = sortedInfo;
 // console.log(sortedInfo)
 

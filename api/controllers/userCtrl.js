@@ -55,15 +55,11 @@ module.exports = {
 
 	profile: function(req, res) {
 		User.findOne({instagramId: req.user.instagramId}, function (err, doc) {
-			console.log('AAAAAAAAAAAAAAAAA', doc);
 			if (err) {
 				return res.status(500).res.json(err).end();
 			}
 			if (doc) {
-				console.log('DOOOOOOOOOOOOOC', doc)
 				doc.access = 'null';
-				doc.save()
-				console.log('DOOOOOOOOOOOOOC', doc)
 			}
 			return res.json(doc);
 		})

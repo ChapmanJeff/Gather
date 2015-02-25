@@ -18,6 +18,7 @@ var clientSecret = '1db8f9da16ab423cbb37c8f3700c32b6';
 var userCtrl = require('./api/controllers/userCtrl');
 var tagsCtrl = require('./api/controllers/tagsCtrl');
 var dataCtrl = require('./api/controllers/dataCtrl');
+var mediaCtrl = require('./api/controllers/mediaCtrl');
 var collectionsCtrl = require('./api/controllers/collectionsCtrl');
 
 // Middleware ===================
@@ -31,7 +32,6 @@ passport.use(new InstagramStrategy({
     // User.findOrCreate({ instagramId: profile.id }, function (err, user) {
       profile.access = accessToken;
       userCtrl.updateOrCreate(profile).then(function(user) {
-        console.log(user)
         done(null, user);
       }, function (err) {
         done(err, profile);
@@ -55,12 +55,12 @@ passport.deserializeUser(function(obj, done) {
 // Authentication ==================
 
 var isAuthed = function (req, res, next) {
-  console.log(req.user);
 	if(!req.isAuthenticated()) {
 		return res.status(403).end();
 	}
 	return next();
 }
+
 
 
 app.get('/auth/instagram', passport.authenticate('instagram'));
@@ -98,13 +98,20 @@ app.get('/api/profile', isAuthed, userCtrl.profile);
 
 // app.get('/api/userRecentMedia', isAuthed, dataCtrl.userHash);
 
-app.get('/api/allMedia', isAuthed, dataCtrl.allMedia);
+// app.get('/api/allMedia', isAuthed, dataCtrl.allMedia);
 
-app.get('/api/quickMedia', isAuthed, dataCtrl.quickMedia);
+app.get('/api/updateOrCreateMedia', isAuthed, mediaCtrl.updateOrCreate);
+
+app.get('/api/dbMedia', isAuthed, mediaCtrl.list)
+
+// app.get('/api/quickMedia', isAuthed, dataCtrl.quickMedia);
+
+app.get('/api/populateCollection/:tag', isAuthed, mediaCtrl.sortByTag)
 
 app.get('/api/logout', isAuthed, function(req, res){
   req.logout();
   res.redirect('/#/');
+  console.log(123);
 });
 
 // Connections ===================

@@ -64,36 +64,22 @@ module.exports = {
 		var url;
 		function closure(){
 			var count = 0;
-			// console.log(count);
-			// console.log(1)
 			return function(max_id){
-				// console.log(2)
 				var maxId = max_id;
-				// console.log(maxId);
-				// console.log(max_id)
 				if(!maxId){
-					// console.log("url 1")
 					url = 'https://api.instagram.com/v1/users/' + req.user.instagramId + '/media/recent?access_token=' + req.user.access;
 				} else {
-					// console.log("url 2")
 					url = 'https://api.instagram.com/v1/users/' + req.user.instagramId + '/media/recent?access_token=' + req.user.access + maxId;
 				};
 				request.get(url, function (err, response, body){
 					var theRealResponse = JSON.parse(body)
 					a = a.concat(theRealResponse.data);
-					// console.log(duhresponse)
-					// console.log(maxId)
-					// console.log(3)
 					count++;
 					if(err) {
-						// console.log(4);
 						return res.status(500).json(err)
 					} else if(count < 3 && theRealResponse.pagination.next_max_id){
-						// console.log(theRealResponse.pagination.next_max_id)
-						// console.log(5)
 						getMedia("&max_id=" + theRealResponse.pagination.next_max_id);
 					} else {
-						// console.log(6)
 						return res.status(200).json(a);
 					}
 				})
@@ -137,36 +123,22 @@ module.exports = {
 		var url;
 		function closure(){
 			var count = 0;
-			// console.log(count);
-			// console.log(1)
 			return function(max_id){
-				// console.log(2)
 				var maxId = max_id;
-				// console.log(maxId);
-				// console.log(max_id)
 				if(!maxId){
-					// console.log("url 1")
 					url = 'https://api.instagram.com/v1/users/' + req.user.instagramId + '/media/recent?access_token=' + req.user.access;
 				} else {
-					// console.log("url 2")
 					url = 'https://api.instagram.com/v1/users/' + req.user.instagramId + '/media/recent?access_token=' + req.user.access + maxId;
 				};
 				request.get(url, function (err, response, body){
 					var theRealResponse = JSON.parse(body)
 					a = a.concat(theRealResponse.data);
-					// console.log(duhresponse)
-					// console.log(maxId)
-					// console.log(3)
 					count++;
 					if(err) {
-						// console.log(4);
 						return res.status(500).json(err)
 					} else if(theRealResponse.pagination.next_max_id){
-						// console.log(theRealResponse.pagination.next_max_id)
-						// console.log(5)
 						getMedia("&max_id=" + theRealResponse.pagination.next_max_id);
 					} else {
-						// console.log(6)
 						return res.status(200).json(a);
 					}
 				})

@@ -3,10 +3,7 @@ var Collection = require('../models/collections');
 module.exports = {
 
 	post: function (req, res) {
-		console.log('STARRRRRTTTTT', req.body)
-		// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!req.body is this ', req.user);
 		Collection.findOne({user: req.user._id}, function(err, doc) {
-			// console.log('*******************************',req.body.tagId, doc.tag[0].tagId, doc.tag[0].url, req.body.url, req.body);
 			if (err) {
 				return res.status(500).json(err).end();
 			}
@@ -19,7 +16,6 @@ module.exports = {
 				var newCollection = new Collection();
 				newCollection.collectionNames.push(req.body);
 				newCollection.user = req.user._id;
-				console.log(newCollection);
 				newCollection.save(function(err, collection) {
 					if (err) {
 						return res.status(500).json(err);

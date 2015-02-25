@@ -2,6 +2,15 @@ var app = angular.module('gather');
 
 app.controller('homeCtrl', function (homeService, $scope, mainService) {
 
+// var updateMedia = function () {
+// 	mainService.updateMedia();
+// }
+
+// updateMedia();
+
+
+
+
 // ###########Moved info to MainCtrl #############
 
 // $scope.getData = function () {

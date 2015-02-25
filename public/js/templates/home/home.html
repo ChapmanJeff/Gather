@@ -27,7 +27,7 @@
 	  				<div class="form-group">
 						  <label class="control-label" for="inputDefault"><h4>Add a New Collection</h4></label>
 						  <form ng-submit="collectionPost(colName)">
-						  	<input type="text" placeholder="Enter Hashtag Name" class="form-control" id="inputDefault" ng-model="colName">
+						  	<input type="text" ng-submit="collectionPost(colName)" placeholder="Enter Hashtag Name" class="form-control" id="inputDefault" ng-model="colName">
 						  </form>
 						</div>
 	  				<ul class="collectionsList text-center">
@@ -41,7 +41,7 @@
 	  <div class="col-md-9 addShadow">
 	  	<div class="instaBoxContainer col-md-3" ng-repeat="media in allMedia | filter: hashInfo" >
 	  		<div class="instaBox text-center">
-	  			<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle">  <!-- left: enlarge -->
+	  			<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic">  <!-- left: enlarge -->
 	  				<div class="text-center tagSite" ng-repeat="tag in media.tags"><!-- #{{tag}} --></div>
 	  		</div>
 	  	</div>

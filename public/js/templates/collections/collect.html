@@ -1,7 +1,15 @@
-Individual Collections
-
 <div class="row">
-	<div class="col-md-12">
-		<div class="col-md-4" ng-repeat="media in sortedInfo"><img src="{{media.images.standard_resolution.url}}" class="img-responsive"></div>
+	<div class="col-md-2"></div>
+	<div class="col-md-8 text-center"><h2>SweetLilAlice</h2></div><hr>
+	<div class="col-md-2"></div>
+</div>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 text-center">
+		<div class="col-md-12"></div>
+			<div class="col-md-3" ng-repeat="media in populateCollection">
+				<div><img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic"></div>
+			</div>
 	</div>
+	<div class="col-md-2"></div>	
 </div>

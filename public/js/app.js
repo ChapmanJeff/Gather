@@ -28,10 +28,10 @@ app.config(function($routeProvider) {
 		})
 		.when('/collections/:id', {
 			templateUrl: '/js/templates/collections/collect.html',
-			controller: 'collectionsCtrl',
+			controller: 'collectCtrl',
 			resolve: {
-				sortedInfo: function ($route, mainService) {
-					return mainService.sortedInfo($route.current.params.id);
+				populateCollection: function ($route, mainService) {
+					return mainService.populateCollection($route.current.params.id);
 				}
 			}
 		})

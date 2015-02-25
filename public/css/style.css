@@ -2,6 +2,11 @@
 	outline: 1px solid red;
 }*/
 
+.profileDot {
+	height:50px;
+	width:50px;
+	border: 2px solid #FFFFFF;
+}
 
 .instaBoxContainer {
 	height: 25%;
@@ -14,9 +19,8 @@
 	height: 70%;
 }
 
-.instaBox img {
+.instaPic {
 	border: 3px solid #2AA1E6;
-/*	border-radius: 100%;*/
 }
 
 .tagSite {
