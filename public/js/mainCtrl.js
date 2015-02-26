@@ -1,22 +1,35 @@
 var app = angular.module('gather');
 
-app.controller('mainCtrl', function ($scope, mainService) {
+app.controller('mainCtrl', function ($scope, mainService, $timeout) {
 
 $scope.updateOrCreateMedia = function () {
+	console.log('hey')
 	mainService.updateOrCreateMedia().then(function(res) {
+		console.log('hi again')
 		console.log(res);
-		$scope.dbMedia();
+		$timeout(function() {
+        $scope.dbMedia()
+        console.log('dbMedia with timeout fired')
+    },  65000);
 	})
 }
+
+$timeout(function() {
+        $scope.updateOrCreateMedia()
+        console.log('updateOrCreateMedia with timeout fired')
+    },  10000);
+
 
 $scope.dbMedia = function () {
 	mainService.dbMedia().then(function(res) {
-		console.log(res.data)
 		$scope.allMedia = res.data;
 		$scope.gif = true;
+		console.log($scope.allMedia)
 		// $scope.allMedia = res.data.data;
 	})
 }
+
+
 
 // $scope.populateCollection = function (name) {
 // 	mainService.populateCollection(name).then(function(res) {
@@ -54,10 +67,8 @@ $scope.collectionNameInfo = function () {
 }
 
 $scope.collectionPost = function (colName) {
-	console.log($scope.colName)
-	console.log($scope.colName)
 	mainService.collectionPost(colName);
-	$scope.colName = '';
+	document.getElementById("collectionInput").reset();
 	console.log($scope.colName)
 	$scope.collectionNameInfo();
 }
@@ -67,6 +78,5 @@ $scope.profileInfo();
 // $scope.quickMedia();
 // $scope.fullData();
 $scope.collectionNameInfo();
-$scope.updateOrCreateMedia();
 
 })

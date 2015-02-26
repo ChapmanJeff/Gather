@@ -30,8 +30,8 @@ app.service('mainService', function ($http, $q) {
 			url: '/api/populateCollection/' + tag
 		})
 		.then(function(res) {
-			console.log(res.data);
-			var data = res.data;
+			console.log(res);
+			var data = res;
 			dfd.resolve(data);
 		})
 		return dfd.promise;
@@ -89,7 +89,6 @@ app.service('mainService', function ($http, $q) {
 			method: 'GET',
 			url: '/api/collections'
 		}).then(function(res) {
-			console.log(res.data[0].collectionNames);
 			var data = res.data[0].collectionNames;
 			dfd.resolve(data);
 		})
