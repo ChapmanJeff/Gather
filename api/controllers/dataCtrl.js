@@ -10,19 +10,19 @@ module.exports = {
 	//       res.status(500).json(err);
 	//     }
 	//     var info = JSON.parse(body);
-	//     console.log('!!!!!!!!!!!!====== ', info.data[1].tags.length)
+	
 
 	//     var tags = function () {
 	//     	var a = [];
 	//     	// a.push({pagination: info.pagination})
 	// 	    for (var i = 0; i < info.data.length; i++) {
 	// 	    	for (key in info.data[i]) {
-	// 	    		console.log(key)
+	
 	// 	    		// if (info.data[i].tags[j] === 'devmountain') {
 	// 	    		if (key === 'tags') {
-	// 	    			console.log(key.length, 'Nowwwwwww')
+	
 	// 						for (var j = 0; j < key.length; j++) {
-	// 							// console.log(key.[j], 'This now')
+	
 	// 							if (info.data[i].tags[j] === 'thefoodandthehat'){
 	// 								a.push(info.data[i]);
 	// 							}

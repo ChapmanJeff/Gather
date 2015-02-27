@@ -4,28 +4,24 @@
 	  	<div class="profilePic"><img src="{{profile.profilePic}}" class="img-responsive img-thumbnail"></div>
 	  	<div class="userInfo"><h3>{{profile.name}}</h3></div><hr>
 		</div>
-		<div class="text-center">
+		<div class="col-md-12 text-center">
 			<h4 style="text-decoration: underline">Collections</h4>
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<div class="col-md-12"></div>
-					<ul class="collectionsList text-left">
-					  <li ng-repeat="collection in collections">
-							<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
-					  </li>
-					</ul>
-				</div>
-			</div>
+			<ul class="collectionsList text-center">
+			  <li ng-repeat="collection in collections">
+					<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
+			  </li>
+			</ul>
+		</div>
 	</div>
 	<div class="col-md-9">
 		<div class="col-md-12 text-center">
 			<div class="form-group">
-			  <label class="control-label" for="inputDefault"><h4>Add a New Collection</h4></label>
+			  <label class="control-label" for="inputDefault"><h4>Add Collection</h4></label>
 			  <form id="collectionInput" ng-submit="collectionPost(colName2)">
 			  	<input type="text" placeholder="Enter Hashtag Name" class="form-control" id="inputDefault" ng-model="colName2">
 			  </form>
 			</div>
-			<div class="col-md-3" ng-repeat="collection in collections | filter: individualSearch">
+			<div class="col-md-3" ng-repeat="collection in collections">
 				<div class="collectionTitle text-center"><h3><a href="/#/collections/{{collection.name}}">#{{collection.name}}</a></h3></div>
 				<div class="collectionPreview text-center">
 					Preview Here

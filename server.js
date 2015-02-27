@@ -96,6 +96,8 @@ app.post('/api/collections', isAuthed, collectionsCtrl.post);
 
 app.get('/api/profile', isAuthed, userCtrl.profile);
 
+app.get('/api/updatedProfile', isAuthed, userCtrl.update);
+
 // app.get('/api/userRecentMedia', isAuthed, dataCtrl.userHash);
 
 // app.get('/api/allMedia', isAuthed, dataCtrl.allMedia);

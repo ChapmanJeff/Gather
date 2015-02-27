@@ -1,5 +1,4 @@
 
-<div class="container">
 <div class="row">
 	<div class="col-md-3 text-center"><img src="http://www.gathercollegehill.com/GATHER-LOGO-dropshadow.png" style="width:150px; height:150px"></div>
 	<div class="col-md-9 text-center">
@@ -11,52 +10,67 @@
 		</div>
 	</div>
 </div>
-			<!-- 	ng-show="!hashInfo" ties to the set of divs 2nd down -->
-	<div class="row">  
-	  <div class="col-md-3">
-	  	<div class="col-md-12 profileBox text-center">
-	  		<div class="profilePic"><img src="{{profile.profilePic}}" class="img-responsive img-thumbnail"></div>
-	  		<div class="userInfo"><h3>{{profile.name}}</h3></div>
-					<div class="col-md-12">
-		  			<div class="col-md-4 text-center"><h6>Followed</h6><h4>{{profile.followed_by}}</h4></div>
-		  			<div class="col-md-4 text-center"><h6>Follows</h6><h4>{{profile.follows}}</h4></div>
-		  			<div class="col-md-4 text-center"><h6>Posts</h6><h4>{{profile.posts}}</h4></div>
-	  			</div>
-	  			<div class="col-md-12 text-center"><h5>{{profile.bio}}</h5><hr></div>
-	  			<div class="col-md-12 text-center">
-	  				<div class="form-group">
-						  <label class="control-label" for="inputDefault"><h4>Add a New Collection</h4></label>
-						  <form ng-submit="collectionPost(colName)" id="collectionInput">
-						  	<input type="text" ng-submit="collectionPost(colName)" placeholder="Enter Hashtag Name" class="form-control" id="inputDefault" ng-model="colName">
-						  </form>
-						</div>
-	  				<ul class="collectionsList text-center">
-						  <li ng-repeat="collection in collections">
-								<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
-						  </li>
-						</ul>
-	  			</div>
-	  	</div>
-	  </div>
-	  <div class="col-md-9 addShadow">
-	  	<div class="instaBoxContainer col-md-3" ng-repeat="media in allMedia | filter: hashInfo" >
-	  		<div class="instaBox text-center">
-	  			<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic">  <!-- left: enlarge -->
-	  				<div class="text-center tagSite" ng-repeat="tag in media.tags"><!-- #{{tag}} --></div>
-	  		</div>
-	  	</div>
-	  	<h3 ng-show="!gif" class="text-center"><img src="../../gif/710.GIF" style="height:100px; width:100px">Loading</h3>
-	  </div>
-	</div>
-	<!-- <div class="row" ng-show="hashInfo">
-	  <div class="col-md-3"></div>
-	  <div class="col-md-9 addShadow">
-	  	<div class="instaBoxContainer col-md-3" ng-repeat="media in searchResult" >
-	  		<div class="instaBox text-center">
-	  			<img src="{{media.images.standard_resolution.url}}" class="img-responsive">
-	  				<div class="text-center" ng-repeat="tag in media.tags">#{{tag}}</div>
-	  		</div>
-	  	</div>
-	  </div>
-	</div> -->
+<div class="row">  
+  <div class="col-md-3">
+  	<div class="col-md-12 profileBox text-center">
+  		<div class="profilePic"><img src="{{profile.profilePic}}" class="img-responsive img-thumbnail"></div>
+  		<div class="userInfo"><h3>{{profile.name}}</h3></div>
+				<div class="col-md-12">
+	  			<div class="col-md-4 text-center"><h6>Followed</h6><h4>{{profile.followed_by}}</h4></div>
+	  			<div class="col-md-4 text-center"><h6>Follows</h6><h4>{{profile.follows}}</h4></div>
+	  			<div class="col-md-4 text-center"><h6>Posts</h6><h4>{{profile.posts}}</h4></div>
+  			</div>
+  			<div class="col-md-12 text-center"><h5>{{profile.bio}}</h5><hr></div>
+  			<div class="col-md-12 text-center">
+  				<div class="form-group">
+					  <label class="control-label" for="inputDefault"><h4 style="text-decoration: underline">Add Collection</h4></label>
+					  <form ng-submit="collectionPost(colName)" id="collectionInput">
+					  	<label class="control-label" for="inputDefault"><h6>Enter the exact hashtag:</h6></label>
+					  	<input type="text" ng-submit="collectionPost(colName)" placeholder="Ex: BestDayEver" class="form-control" id="inputDefault" ng-model="colName">
+					  </form>
+					</div>
+  				<ul class="collectionsList text-center">
+					  <li ng-repeat="collection in collections">
+							<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
+					  </li>
+					</ul>
+  			</div>
+  	</div>
+  </div>
+  <div class="col-md-9 addShadow">
+  	<div class="instaBoxContainer col-md-3" ng-repeat="media in allMedia | filter: hashInfo" >
+  		<div class="instaBox text-center imgHover">
+  			<a data-toggle="modal" data-target="#myModal">
+  				<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic" class="text-center">
+  				<span class="textHover-content img-circle img-responsive text-center">
+  					<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
+  				</span>
+  			</a>	
+  		</div>
+  	</div>
+  	<div class="col-md-2"></div>
+  	<div class="col-md-8">
+  		<div class="panel panel-default text-center">
+  			<div class="panel-body" ng-show="!gif">
+  				<h3 class="text-center"><img src="../../gif/710.GIF" style="height:100px; width:100px"><br/>Loading</h3><br/><h4 class="text-center">If this is your first time ever logging in<br/>it may take a while to Gather your pictures</h4>
+  			</div>
+  		</div>
+  	</div>
+  	<div class="col-md-2"></div>
+  </div>
 </div>
+
+<!-- <div style="height: 305px">
+    <carousel interval="myInterval">
+      <slide ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.images.standard_resolution.url}}" style="margin:auto;">
+        <div class="carousel-caption">
+        	<div ng-repeat="slide in slides.tags">
+          <h4>{{slide.tags}}</h4>
+          </div>
+          <p>{{slide.caption.text}}</p>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+ -->

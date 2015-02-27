@@ -4,24 +4,20 @@
 	  	<div class="profilePic"><img src="{{profile.profilePic}}" class="img-responsive img-thumbnail"></div>
 	  	<div class="userInfo"><h3>{{profile.name}}</h3></div><hr>
 		</div>
-		<div class="text-center">
+		<div class="col-md-12 text-center">
 			<h4 style="text-decoration: underline">Collections</h4>
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<div class="col-md-12"></div>
-					<ul class="collectionsList text-left">
-					  <li ng-repeat="collection in collections">
-							<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a><br/><br/>
-					  </li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-4"></div>
+			<ul class="collectionsList text-center">
+			  <li ng-repeat="collection in collections">
+					<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
+			  </li>
+			</ul>
+		</div>
+		<div class="col-md-4"></div>
 	</div>
 	<div class="col-md-9">
-		<div class="col-md-12 text-center">
+		<div class="col-md-12">
 			<div class="text-center"><h2>#{{title}}</h2></div><hr>
-			<div class="col-md-3" ng-repeat="media in populateCollection">
+			<div class="col-md-3 text-center" ng-repeat="media in populateCollection">
 				<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic">
 				</div>
 			</div>

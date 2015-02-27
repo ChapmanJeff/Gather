@@ -27,6 +27,35 @@
 	height: 30%;
 }
 
+span.textHover-content {
+  background: rgba(0,0,0,0.4);
+  color: white;
+  cursor: pointer;
+  /*display: table;*/
+  height: 96%;
+  left: 2.1%;
+  position: absolute;
+  top: 2.1%;
+  width: 96%;
+  opacity: 0;
+  -webkit-transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  transition: opacity 500ms;
+}
+ 
+span.textHover-content span {
+	 height: 96%;
+  left: 2%;
+  position: absolute;
+  top:35%;
+  width: 96%;
+}
+
+.imgHover a:hover span.textHover-content {
+	opacity: 1;
+}
+
 /*.enlarge:hover {
 	transform:scale(2,2);
 	transform-origin:0 0;

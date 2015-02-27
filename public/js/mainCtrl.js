@@ -7,27 +7,42 @@ $scope.updateOrCreateMedia = function () {
 	mainService.updateOrCreateMedia().then(function(res) {
 		console.log('hi again')
 		console.log(res);
-		$timeout(function() {
-        $scope.dbMedia()
-        console.log('dbMedia with timeout fired')
-    },  65000);
+		$scope.dbMedia()
+		$scope.updatedProfile();
+		$scope.gif = true;
 	})
 }
-
-$timeout(function() {
-        $scope.updateOrCreateMedia()
-        console.log('updateOrCreateMedia with timeout fired')
-    },  10000);
 
 
 $scope.dbMedia = function () {
 	mainService.dbMedia().then(function(res) {
 		$scope.allMedia = res.data;
-		$scope.gif = true;
+		$scope.carousel();
+		$scope.profileInfo();
+		// $scope.gif = true;
 		console.log($scope.allMedia)
-		// $scope.allMedia = res.data.data;
 	})
 }
+
+$scope.carousel = function () {
+ $scope.myInterval = 0;
+  var slides = $scope.slides = $scope.allMedia;
+}
+
+
+  // $scope.myInterval = 5000;
+  // var slides = $scope.slides = [];
+  // $scope.addSlide = function() {
+  //   var newWidth = 600 + slides.length + 1;
+  //   slides.push({
+  //     image: 'http://placekitten.com/' + newWidth + '/300',
+  //     text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
+  //       ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+  //   });
+  // };
+  // for (var i=0; i<4; i++) {
+  //   $scope.addSlide();
+  // }
 
 
 
@@ -60,6 +75,13 @@ $scope.profileInfo = function () {
 	})
 }
 
+$scope.updatedProfile = function () {
+	mainService.updatedProfile().then(function(res) {
+		console.log(res);
+		$scope.profile = res;
+	})
+}
+
 $scope.collectionNameInfo = function () {
 	mainService.collectionNameInfo().then(function(res) {
 		$scope.collections = res;
@@ -75,8 +97,7 @@ $scope.collectionPost = function (colName) {
 
 $scope.dbMedia();
 $scope.profileInfo();
-// $scope.quickMedia();
-// $scope.fullData();
 $scope.collectionNameInfo();
+$scope.updateOrCreateMedia();
 
 })

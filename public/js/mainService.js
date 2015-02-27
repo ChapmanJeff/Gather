@@ -83,6 +83,20 @@ app.service('mainService', function ($http, $q) {
 		return dfd.promise;
 	}
 
+	this.updatedProfile = function () {
+		var dfd = $q.defer();
+		$http({
+			method: 'GET',
+			url: '/api/updatedProfile'
+		})
+		.then(function(res) {
+			console.log(res)
+			var prof = res.data;
+			dfd.resolve(prof);
+		})
+		return dfd.promise;
+	}
+
 	this.collectionNameInfo = function () {
 		var dfd = $q.defer();
 		$http({
