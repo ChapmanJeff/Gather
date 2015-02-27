@@ -5,7 +5,7 @@ var session = require('express-session')
 var passport = require('passport');
 var request = require('request')
 var InstagramStrategy = require('passport-instagram').Strategy;
-var port = 9090;
+var port = (process.env.EXPRESS_PORT || 9090);
 
 var mongoUri = 'mongodb://localhost/gather';
 mongoose.connect(mongoUri);
@@ -24,8 +24,8 @@ var collectionsCtrl = require('./api/controllers/collectionsCtrl');
 // Middleware ===================
 
 passport.use(new InstagramStrategy({
-    clientID: clientID,
-    clientSecret: clientSecret,
+    clientID: clientID,  //process.env.INSTAGRAM_CLIENT_ID,
+    clientSecret: clientSecret, //process.env.INSTAGRAM_CLIENT_SECRET,
     callbackURL: "http://localhost:9090/auth/instagram/callback"
   },
   function(accessToken, refreshToken, profile, done) {
