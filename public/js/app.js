@@ -1,4 +1,4 @@
-var app = angular.module('gather', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('gather', ['ngRoute', 'ui.bootstrap', 'urlWhitelist', 'ui.bootstrap.pagination']);
 
 app.config(function($routeProvider) {
 	$routeProvider
@@ -24,7 +24,5 @@ app.config(function($routeProvider) {
 		})
 		.otherwise('/');
 
-
-
-
 });
+

@@ -40,12 +40,26 @@
   <div class="col-md-9 addShadow">
   	<div class="instaBoxContainer col-md-3" ng-repeat="media in allMedia | filter: hashInfo" >
   		<div class="instaBox text-center imgHover">
-  			<a data-toggle="modal" data-target="#myModal">
+
+        <!-- NG SHOW FOR IMG -->
+  			<a data-toggle="modal" data-target="#myModal" ng-show="!media.videos.standard_resolution.url">
   				<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic" class="text-center">
   				<span class="textHover-content img-circle img-responsive text-center">
   					<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
   				</span>
   			</a>	
+
+        <!-- NG SHOW FOR VIDEO -->
+        <a data-toggle="modal" data-target="#myModal" ng-show="media.videos.standard_resolution.url">
+          <video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" controls class="img-responsive img-circle instaPic">
+          </video>
+
+          <span class="textHover-content2 img-responsive img-circle text-center">
+            <span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
+          </span>
+        </a>          
+
+
   		</div>
   	</div>
   	<div class="col-md-2"></div>

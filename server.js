@@ -24,8 +24,8 @@ var collectionsCtrl = require('./api/controllers/collectionsCtrl');
 // Middleware ===================
 
 passport.use(new InstagramStrategy({
-    clientID: clientID,  //process.env.INSTAGRAM_CLIENT_ID,
-    clientSecret: clientSecret, //process.env.INSTAGRAM_CLIENT_SECRET,
+    clientID: (process.env.INSTAGRAM_CLIENT_ID || clientID), 
+    clientSecret: (process.env.INSTAGRAM_CLIENT_SECRET || clientSecret),
     callbackURL: "http://localhost:9090/auth/instagram/callback"
   },
   function(accessToken, refreshToken, profile, done) {

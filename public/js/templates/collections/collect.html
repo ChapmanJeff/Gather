@@ -15,13 +15,63 @@
 		<div class="col-md-4"></div>
 	</div>
 	<div class="col-md-9">
-		<div class="col-md-12">
-			<div class="text-center"><h2>#{{title}}</h2></div><hr>
-			<div class="col-md-3 text-center" ng-repeat="media in populateCollection">
-				<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic">
-				</div>
+	<!-- <video src="http://scontent-b.cdninstagram.com/hphotos-xaf1/t50.2886-16/10857639_948746471817387_1249399139_n.mp4" controls>
+  Your browser does not support the <code>video</code> element.
+</video> -->
+
+		<div class="text-center"><h2>#{{title}}</h2></div><hr>
+		<div class="instaBoxContainer col-md-3" ng-repeat="media in populateCollection" >
+			<div class="instaBox text-center imgHover">
+
+				<!-- NG SHOW FOR IMG -->
+				<a data-toggle="modal" data-target="#myModal" ng-show="!media.videos.standard_resolution.url">
+
+					<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic" class="text-center">
+
+					<span class="textHover-content img-circle img-responsive text-center">
+						<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
+					</span>
+
+				</a>	
+
+				<!-- NG SHOW FOR VIDEO -->
+				<a data-toggle="modal" data-target="#myModal" ng-show="media.videos.standard_resolution.url">
+					<video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" controls class="img-responsive img-circle instaPic">
+					</video>
+
+					<span class="textHover-content2 img-responsive img-circle text-center">
+						<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
+					</span>
+				</a>	
+
 			</div>
 		</div>
 	</div>
 </div>
 
+
+
+<!-- <div id="container" ng-show="media.videos.standard_resolution.url">
+	<video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" class="img-responsive img-circle instaPic">
+	</video>
+	<div id="controls"> 
+		<div id="video-controls">
+   	  <button type="button" id="play-pause"><i class="fa fa-play"></i>/<i class="fa fa-pause"></i></button>&nbsp&nbsp
+    	<button type="button" id="full-screen"><i class="fa fa-arrows-alt"></i></button>
+ 	 	</div>
+	</div>
+</div>	
+ -->
+
+
+<!-- 
+		<div class="col-md-12">
+			<div class="text-center"><h2>#{{title}}</h2></div><hr>
+			<div class="col-md-3 text-center" ng-repeat="media in populateCollection">
+				<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic">
+			</div>
+		</div>
+	</div>
+</div>
+
+ -->

@@ -89,15 +89,18 @@ $scope.collectionNameInfo = function () {
 }
 
 $scope.collectionPost = function (colName) {
-	mainService.collectionPost(colName);
 	document.getElementById("collectionInput").reset();
-	console.log($scope.colName)
-	$scope.collectionNameInfo();
+	mainService.collectionPost(colName).then(function(res) {
+		console.log($scope.colName)
+		$scope.collectionNameInfo();
+	})
 }
 
 $scope.dbMedia();
 $scope.profileInfo();
 $scope.collectionNameInfo();
 $scope.updateOrCreateMedia();
+
+
 
 })
