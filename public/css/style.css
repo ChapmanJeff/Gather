@@ -46,7 +46,7 @@ span.textHover-content {
 }
  
 span.textHover-content span {
-	 height: 96%;
+	 height: 30%;
   left: 2%;
   position: absolute;
   top:35%;
@@ -76,45 +76,6 @@ span.textHover-content2 {
   transition: opacity 500ms;
   z-index: 1;
 }
- 
-span.textHover-content2 span {
-	 height: 96%;
-  left: 2%;
-  position: absolute;
-  top:20%;
-  width: 96%;
-}
-
-.imgHover a:hover span.textHover-content2 {
-	opacity: 1;
-}
-
-#controls {
-	position: absolute;
-	left: 35%;
-	bottom: 6%;
-	z-index: 2;
-	background: rgba(0,0,0,0.4);
-	border: rgba(0,0,0,0.9);
-	padding:1px;
-	border-radius: 10%;
-}
-
-#controls button {
-	background:0;
-	border: 0;
-	color: black;
-}
-
-/*.video-controls {
-	postion: absolute;
-	top: 20px;
-}*/
-
-/*.enlarge:hover {
-	transform:scale(2,2);
-	transform-origin:0 0;
-}*/
 
 .profileBox {
 	/*background: #D9EDF7;*/

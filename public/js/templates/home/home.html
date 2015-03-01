@@ -7,6 +7,11 @@
 		  <form ng-submit="hashSearch()">
 		  	<input type="text" placeholder="Search" class="form-control" id="inputDefault" ng-model="hashInfo">
 		  </form>
+
+
+      <pagination ng-show="!hashInfo" boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" class="pagination pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="maxSize"></pagination>
+
+
 		</div>
 	</div>
 </div>
@@ -38,7 +43,32 @@
   	</div>
   </div>
   <div class="col-md-9 addShadow">
-  	<div class="instaBoxContainer col-md-3" ng-repeat="media in allMedia | filter: hashInfo" >
+  <!-- ########### NG SHOW FOR SEARCH BAR ############ -->
+  	<div ng-show="hashInfo" class="instaBoxContainer col-md-3" ng-repeat="media in allMedia | filter: hashInfo" >
+      <div class="instaBox text-center imgHover">
+
+        <!-- NG SHOW FOR IMG -->
+        <a data-toggle="modal" data-target="#myModal" ng-show="!media.videos.standard_resolution.url">
+          <img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic" class="text-center">
+          <span class="textHover-content img-circle img-responsive text-center">
+            <span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
+          </span>
+        </a>  
+
+        <!-- NG SHOW FOR VIDEO -->
+        <a data-toggle="modal" data-target="#myModal" ng-show="media.videos.standard_resolution.url">
+          <video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" controls class="img-responsive img-circle instaPic">
+          </video>
+
+          <span class="textHover-content img-responsive img-circle text-center">
+            <span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
+          </span>
+        </a>          
+
+      </div>
+    </div>
+    <!-- ######### NG SHOW FOR PAGINATION ########### -->
+    <div ng-show="!hashInfo"class="instaBoxContainer col-md-3" ng-repeat="media in filteredMedia">
   		<div class="instaBox text-center imgHover">
 
         <!-- NG SHOW FOR IMG -->
@@ -54,18 +84,24 @@
           <video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" controls class="img-responsive img-circle instaPic">
           </video>
 
-          <span class="textHover-content2 img-responsive img-circle text-center">
+          <span class="textHover-content img-responsive img-circle text-center">
             <span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
           </span>
         </a>          
-
-
   		</div>
   	</div>
+
+    <div class="col-md-12"></div>
+
+    <a href="#top">
+    <div ng-show="!hashInfo" class="col-md-12">
+      <pager total-items="totalItems" ng-model="currentPage" ng-change="pageChanged(currentPage)" total-items="totalItems" items-per-page="itemsPerPage"></pager>
+    </div></a>
+
   	<div class="col-md-2"></div>
   	<div class="col-md-8">
   		<div class="panel panel-default text-center">
-  			<div class="panel-body" ng-show="!gif">
+  			<div class="panel-body" ng-show="!gif2">
   				<h3 class="text-center"><img src="../../gif/710.GIF" style="height:100px; width:100px"><br/>Loading</h3><br/><h4 class="text-center">If this is your first time ever logging in<br/>it may take a while to Gather your pictures</h4>
   			</div>
   		</div>

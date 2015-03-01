@@ -1,4 +1,4 @@
-var app = angular.module('gather', ['ngRoute', 'ui.bootstrap', 'urlWhitelist', 'ui.bootstrap.pagination']);
+var app = angular.module('gather', ['ngRoute', 'ui.bootstrap', 'urlWhitelist']);
 
 app.config(function($routeProvider) {
 	$routeProvider

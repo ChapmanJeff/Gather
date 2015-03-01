@@ -43,6 +43,14 @@ module.exports = {
 		Collection.update({_id: req.params.id}, req.body).exec().then(function(collections) {
 			return res.status(200).json(collections);
 		})
+	},
+
+	delete: function (req, res) {
+		Collection.remove({user: req.user._id, name: req.params.id}, function (err) {
+			if (err) {
+				res.status(500).json(err);
+			}
+		})
 	}
 
 }

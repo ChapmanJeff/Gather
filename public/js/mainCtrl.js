@@ -1,6 +1,6 @@
 var app = angular.module('gather');
 
-app.controller('mainCtrl', function ($scope, mainService, $timeout) {
+app.controller('mainCtrl', function ($scope, mainService, $timeout, $log) {
 
 $scope.updateOrCreateMedia = function () {
 	console.log('hey')
@@ -13,21 +13,78 @@ $scope.updateOrCreateMedia = function () {
 	})
 }
 
-
 $scope.dbMedia = function () {
 	mainService.dbMedia().then(function(res) {
 		$scope.allMedia = res.data;
-		$scope.carousel();
+		// $scope.carousel();
 		$scope.profileInfo();
 		// $scope.gif = true;
 		console.log($scope.allMedia)
+  
+	$scope.filteredMedia = [];
+	$scope.totalItems = $scope.allMedia.length;
+	$scope.itemsPerPage = 16;
+	$scope.currentPage = 1;
+	$scope.maxSize = 5;
+	$scope.pageChanged($scope.currentPage);
 	})
 }
 
-$scope.carousel = function () {
- $scope.myInterval = 0;
-  var slides = $scope.slides = $scope.allMedia;
+$scope.pageChanged = function(currentPage) {
+   var begin = ((currentPage - 1) * $scope.itemsPerPage)
+  , end = begin + $scope.itemsPerPage;
+
+$scope.filteredMedia = $scope.allMedia.slice(begin, end);
+
+};
+
+
+
+// $scope.carousel = function () {
+//  $scope.myInterval = 0;
+//   var slides = $scope.slides = $scope.allMedia;
+// }
+
+
+$scope.profileInfo = function () {
+	mainService.profileInfo().then(function(res) {
+		console.log(res);
+		$scope.profile = res;
+	})
 }
+
+$scope.updatedProfile = function () {
+	mainService.updatedProfile().then(function(res) {
+		console.log(res);
+		$scope.profile = res;
+	})
+}
+
+$scope.collectionNameInfo = function () {
+	mainService.collectionNameInfo().then(function(res) {
+		$scope.collections = res;
+	})
+}
+
+$scope.collectionPost = function (colName) {
+	document.getElementById("collectionInput").reset();
+	mainService.collectionPost(colName).then(function(res) {
+		console.log($scope.colName)
+		$scope.collectionNameInfo();
+	})
+}
+
+$scope.dbMedia();
+$scope.profileInfo();
+$scope.collectionNameInfo();
+$scope.updateOrCreateMedia();
+
+
+$timeout(function() {
+	$scope.gif2 = true;
+	}, 6000);
+})
+
 
 
   // $scope.myInterval = 5000;
@@ -67,40 +124,3 @@ $scope.carousel = function () {
 // 		$scope.allMedia = res;
 // 	});
 // }
-
-$scope.profileInfo = function () {
-	mainService.profileInfo().then(function(res) {
-		console.log(res);
-		$scope.profile = res;
-	})
-}
-
-$scope.updatedProfile = function () {
-	mainService.updatedProfile().then(function(res) {
-		console.log(res);
-		$scope.profile = res;
-	})
-}
-
-$scope.collectionNameInfo = function () {
-	mainService.collectionNameInfo().then(function(res) {
-		$scope.collections = res;
-	})
-}
-
-$scope.collectionPost = function (colName) {
-	document.getElementById("collectionInput").reset();
-	mainService.collectionPost(colName).then(function(res) {
-		console.log($scope.colName)
-		$scope.collectionNameInfo();
-	})
-}
-
-$scope.dbMedia();
-$scope.profileInfo();
-$scope.collectionNameInfo();
-$scope.updateOrCreateMedia();
-
-
-
-})

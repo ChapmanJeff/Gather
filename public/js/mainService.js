@@ -37,6 +37,13 @@ app.service('mainService', function ($http, $q) {
 		return dfd.promise;
 	}
 
+	this.deleteCollection = function (id) {
+		$http({
+			method: 'DELETE',
+			url: '/api/deleteCollection/' + id
+		})
+	}
+
 	// this.fullData = function () {
 	// 	return $http({
 	// 		method: 'GET',

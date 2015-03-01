@@ -10,8 +10,7 @@ var port = (process.env.EXPRESS_PORT || 9090);
 var mongoUri = 'mongodb://localhost/gather';
 mongoose.connect(mongoUri);
 
-var clientID = 'a090d1e52313460cb90ae5a9873750a0';
-var clientSecret = '1db8f9da16ab423cbb37c8f3700c32b6';
+
 
 // Controllers ==================
 
@@ -24,8 +23,8 @@ var collectionsCtrl = require('./api/controllers/collectionsCtrl');
 // Middleware ===================
 
 passport.use(new InstagramStrategy({
-    clientID: (process.env.INSTAGRAM_CLIENT_ID || clientID), 
-    clientSecret: (process.env.INSTAGRAM_CLIENT_SECRET || clientSecret),
+    clientID: (process.env.INSTAGRAM_CLIENT_ID), 
+    clientSecret: (process.env.INSTAGRAM_CLIENT_SECRET),
     callbackURL: "http://localhost:9090/auth/instagram/callback"
   },
   function(accessToken, refreshToken, profile, done) {
@@ -115,6 +114,8 @@ app.get('/api/logout', isAuthed, function(req, res){
   res.redirect('/#/');
   console.log(123);
 });
+
+app.delete('/api/deleteCollection/:id', isAuthed, collectionsCtrl.delete)
 
 // Connections ===================
 
