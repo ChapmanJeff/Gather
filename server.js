@@ -5,7 +5,7 @@ var session = require('express-session')
 var passport = require('passport');
 var request = require('request')
 var InstagramStrategy = require('passport-instagram').Strategy;
-var port = (process.env.EXPRESS_PORT || 9090);
+var port = (process.env.EXPRESS_PORT || 80);
 
 var mongoUri = 'mongodb://localhost/gather';
 mongoose.connect(mongoUri);
