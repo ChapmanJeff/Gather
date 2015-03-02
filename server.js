@@ -26,7 +26,7 @@ var collectionsCtrl = require('./api/controllers/collectionsCtrl');
 passport.use(new InstagramStrategy({
     clientID: (process.env.INSTAGRAM_CLIENT_ID || clientID), 
     clientSecret: (process.env.INSTAGRAM_CLIENT_SECRET || clientSecret),
-    callbackURL: "http://localhost:9090/auth/instagram/callback"
+    callbackURL: "http://gather.life/auth/instagram/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     // User.findOrCreate({ instagramId: profile.id }, function (err, user) {
