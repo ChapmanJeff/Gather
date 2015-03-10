@@ -5,13 +5,12 @@ var session = require('express-session')
 var passport = require('passport');
 var request = require('request')
 var InstagramStrategy = require('passport-instagram').Strategy;
-var port = (process.env.EXPRESS_PORT || 80);
+var port = (process.env.EXPRESS_PORT || 8080);
 
 var mongoUri = 'mongodb://localhost/gather';
 mongoose.connect(mongoUri);
 
-var clientID = 'a090d1e52313460cb90ae5a9873750a0';
-var clientSecret = '1db8f9da16ab423cbb37c8f3700c32b6';
+
 
 // Controllers ==================
 
