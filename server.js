@@ -5,12 +5,13 @@ var session = require('express-session')
 var passport = require('passport');
 var request = require('request')
 var InstagramStrategy = require('passport-instagram').Strategy;
-var port = (process.env.EXPRESS_PORT || 8080);
+var port = (process.env.EXPRESS_PORT || 9090);
 
 var mongoUri = 'mongodb://localhost/gather';
 mongoose.connect(mongoUri);
 
-
+var clientID = 'a090d1e52313460cb90ae5a9873750a0';
+var clientSecret = '1db8f9da16ab423cbb37c8f3700c32b6';
 
 // Controllers ==================
 
@@ -25,7 +26,7 @@ var collectionsCtrl = require('./api/controllers/collectionsCtrl');
 passport.use(new InstagramStrategy({
     clientID: (process.env.INSTAGRAM_CLIENT_ID || clientID), 
     clientSecret: (process.env.INSTAGRAM_CLIENT_SECRET || clientSecret),
-    callbackURL: "http://gather.life/auth/instagram/callback"
+    callbackURL: "http://localhost:9090/auth/instagram/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     // User.findOrCreate({ instagramId: profile.id }, function (err, user) {

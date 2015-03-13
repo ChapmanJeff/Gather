@@ -1,6 +1,6 @@
 var app = angular.module('gather');
 
-app.controller('mainCtrl', function ($scope, mainService, $timeout, $log) {
+app.controller('mainCtrl', function ($scope, mainService, $timeout, $log, $q) {
 
 $scope.updateOrCreateMedia = function () {
 	console.log('hey')
@@ -62,7 +62,22 @@ $scope.updatedProfile = function () {
 
 $scope.collectionNameInfo = function () {
 	mainService.collectionNameInfo().then(function(res) {
-		$scope.collections = res;
+		console.log(123, $scope.collections)
+		var a = res.map(function(name, index) {
+			var dfd = $q.defer();
+			var b = name.name;
+			console.log(b);
+		  mainService.populateCollection(b).then(function(result) {
+		  	name.data = result.data;
+		  	console.log(name);
+		  	dfd.resolve(name);
+		  })
+		  return dfd.promise;
+		})
+		$q.all(a).then(function(collectionsData) {
+			console.log(collectionsData);
+			$scope.collections = collectionsData;
+		})
 	})
 }
 
@@ -73,6 +88,13 @@ $scope.collectionPost = function (colName) {
 		$scope.collectionNameInfo();
 	})
 }
+
+$scope.deleteCollection = function (id) {
+	mainService.deleteCollection(id).then(function(res) {
+		$scope.collectionNameInfo();
+	})
+}
+
 
 $scope.dbMedia();
 $scope.profileInfo();

@@ -2,7 +2,12 @@ var app = angular.module('gather');
 
 app.controller('collectionsCtrl', function ($scope, mainService) {
 
-
+// $scope.populateCollection = function (tagName) {
+// 	mainService.populateCollection(tagName).then(function(res) {
+// 		console.log(res);
+// 		$scope.res;
+// 	})
+// }
 // $scope.sortedInfo = sortedInfo;
 // console.log(sortedInfo)
 

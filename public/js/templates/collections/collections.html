@@ -8,7 +8,7 @@
 			<h4 style="text-decoration: underline">Collections</h4>
 			<ul class="collectionsList text-center">
 			  <li ng-repeat="collection in collections">
-					<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
+					<a href="/#/collections/{{collection._id}}/{{collection.name}}">#{{collection.name}}</a>
 			  </li>
 			</ul>
 		</div>
@@ -16,16 +16,16 @@
 	<div class="col-md-9">
 		<div class="col-md-12 text-center">
 			<div class="form-group">
-			  <label class="control-label" for="inputDefault"><h4>Add Collection</h4></label>
+			  <label class="control-label" for="inputDefault"><h4>Save a Collection</h4></label>
 			  <form id="collectionInput" ng-submit="collectionPost(colName2)">
 			  	<input type="text" placeholder="Enter Hashtag Name" class="form-control" id="inputDefault" ng-model="colName2">
 			  </form>
 			</div>
-			<div class="col-md-3" ng-repeat="collection in collections">
-				<div class="collectionTitle text-center"><h3><a href="/#/collections/{{collection.name}}">#{{collection.name}}</a></h3></div>
-				<div class="collectionPreview text-center">
-					Preview Coming Soon
-				</div>
+			<div class="col-md-3" ng-repeat="collection in collections"><a href="/#/collections/{{collection._id}}/{{collection.name}}">
+				<div class="collectionTitle text-center"><h3>#{{collection.name}}</h3></div>
+				<div class="collectionPreview text-center col-md-6" ng-repeat="image in collection.data | limitTo: 4">
+					<img src="{{image.images.standard_resolution.url}}" class="img-responsive">
+				</div></a>
 			</div>
 		</div>
 	</div>

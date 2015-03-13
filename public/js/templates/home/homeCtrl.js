@@ -2,6 +2,43 @@ var app = angular.module('gather');
 
 app.controller('homeCtrl', function (homeService, $scope, mainService) {
 
+var counter = 0;
+
+$scope.setMedia = function (media) {
+	console.log(media)
+	console.log(222, media);
+	$scope.index = Number(media);
+	console.log($scope.index)
+	counter = 0;
+}
+
+$scope.nextPage = function () {
+	if($scope.index === 15) {
+		counter += 1;
+		$scope.pageChanged($scope.currentPage + counter)
+		$scope.index = 0;
+		console.log(counter);
+	}
+	else {
+		$scope.index = $scope.index + 1;
+		console.log($scope.index);
+	}
+}
+
+$scope.backPage = function () {
+	if($scope.index === 0) {
+		counter -= 1;
+		$scope.pageChanged($scope.currentPage - counter)
+		$scope.index = 15;
+		console.log(counter);
+	}
+	else {
+		$scope.index = $scope.index - 1;
+		console.log($scope.index);
+	}
+}
+
+
 // var updateMedia = function () {
 // 	mainService.updateMedia();
 // }

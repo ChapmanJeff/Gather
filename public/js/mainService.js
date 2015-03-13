@@ -38,10 +38,14 @@ app.service('mainService', function ($http, $q) {
 	}
 
 	this.deleteCollection = function (id) {
-		$http({
+		 var dfd = $q.defer();
+		 $http({
 			method: 'DELETE',
 			url: '/api/deleteCollection/' + id
+		}).then(function(res) {
+			dfd.resolve(res);
 		})
+		return dfd.promise;
 	}
 
 	// this.fullData = function () {
@@ -110,6 +114,7 @@ app.service('mainService', function ($http, $q) {
 			method: 'GET',
 			url: '/api/collections'
 		}).then(function(res) {
+			console.log(res);
 			var data = res.data[0].collectionNames;
 			dfd.resolve(data);
 		})

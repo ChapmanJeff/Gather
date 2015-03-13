@@ -30,7 +30,7 @@
 span.textHover-content {
   background: rgba(0,0,0,0.4);
   color: white;
-  cursor: pointer;
+  cursor: zoom-in;
   /*display: table;*/
   height: 96%;
   left: 2.1%;
@@ -46,17 +46,34 @@ span.textHover-content {
 }
  
 span.textHover-content span {
-	 height: 30%;
+	height: 30%;
   left: 2%;
   position: absolute;
   top:35%;
   width: 96%;
+  z-index: 3;
 }
 
-.imgHover a:hover span.textHover-content {
+.hoverIcon {
+  opacity: 0;
+}
+
+.hoverIcon:hover {
+  opacity: 1;
+}
+
+.imgHover div:hover span.textHover-content {
 	opacity: 1;
 }
 
+.tagLink {
+  color: white;
+}
+
+.tagLink:hover {
+  color: #3AA9E8;
+  text-decoration: none;
+}
 
 /* ####### Video Ng-Show ######  */
 span.textHover-content2 {
@@ -99,6 +116,38 @@ span.textHover-content2 {
 	padding: 0;
 }
 
+.modalSidebar {
+  height:572px;
+  overflow: scroll;
+}
 
+.modalPageRight {
+  position: absolute;
+  right: -5%;
+  bottom: 50%;
+}
+
+.modalPageLeft {
+  position: absolute;
+  left: -5%;
+  bottom: 50%;
+}
+
+.collectionPreview {
+  padding: 0;
+  border: 1px solid #33A6E7;
+}
+
+.noPad {
+  padding: 0;
+}
+
+.noPadLeft {
+  padding-left: 0;
+}
+
+.commentMarg {
+  margin: 5px 0;
+}
 
 

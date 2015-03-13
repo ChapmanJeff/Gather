@@ -12,13 +12,18 @@ app.config(function($routeProvider) {
 		.when('/collections', {
 			templateUrl: '/js/templates/collections/collections.html',
 			controller: 'collectionsCtrl'
+			// resolve: {
+			// 	populateCollection: function($route, mainService) {
+			// 		return mainService.populateCollection()
+			// 	}
+			// }
 		})
-		.when('/collections/:id', {
+		.when('/collections/:id/:name', {
 			templateUrl: '/js/templates/collections/collect.html',
 			controller: 'collectCtrl',
 			resolve: {
 				populateCollection: function ($route, mainService) {
-					return mainService.populateCollection($route.current.params.id);
+					return mainService.populateCollection($route.current.params.name);
 				}
 			}
 		})

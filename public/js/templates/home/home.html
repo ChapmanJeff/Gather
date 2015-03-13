@@ -28,7 +28,7 @@
   			<div class="col-md-12 text-center"><h5>{{profile.bio}}</h5><hr></div>
   			<div class="col-md-12 text-center">
   				<div class="form-group">
-					  <label class="control-label" for="inputDefault"><h4 style="text-decoration: underline">Add Collection</h4></label>
+					  <label class="control-label" for="inputDefault"><h4 style="text-decoration: underline">Save a Collection</h4></label>
 					  <form ng-submit="collectionPost(colName)" id="collectionInput">
 					  	<label class="control-label" for="inputDefault"><h6>Enter the exact hashtag:</h6></label>
 					  	<input type="text" ng-submit="collectionPost(colName)" placeholder="Ex: BestDayEver" class="form-control" id="inputDefault" ng-model="colName">
@@ -36,58 +36,41 @@
 					</div>
   				<ul class="collectionsList text-center">
 					  <li ng-repeat="collection in collections">
-							<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
+							<a href="/#/collections/{{collection._id}}/{{collection.name}}">#{{collection.name}}</a><a ng-click="deleteCollection(collection._id)">&nbsp<i class="fa fa-trash-o fa-lg hoverIcon"></i></a>
 					  </li>
 					</ul>
   			</div>
   	</div>
   </div>
   <div class="col-md-9 addShadow">
+
+
   <!-- ########### NG SHOW FOR SEARCH BAR ############ -->
   	<div ng-show="hashInfo" class="instaBoxContainer col-md-3" ng-repeat="media in allMedia | filter: hashInfo" >
       <div class="instaBox text-center imgHover">
-
-        <!-- NG SHOW FOR IMG -->
-        <a data-toggle="modal" data-target="#myModal" ng-show="!media.videos.standard_resolution.url">
-          <img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic" class="text-center">
-          <span class="textHover-content img-circle img-responsive text-center">
-            <span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
-          </span>
-        </a>  
-
-        <!-- NG SHOW FOR VIDEO -->
-        <a data-toggle="modal" data-target="#myModal" ng-show="media.videos.standard_resolution.url">
-          <video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" controls class="img-responsive img-circle instaPic">
+        <div data-toggle="modal" ng-click="setMedia($index)" data-target="#myModal" ng-show="!media.videos.standard_resolution.url">
+          <img src="{{media.images.standard_resolution.url}}" ng-show="!media.videos.standard_resolution.url" class="img-responsive img-circle instaPic" class="text-center">
+          <video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" ng-show="media.videos.standard_resolution.url" controls class="img-responsive img-circle instaPic">
           </video>
-
-          <span class="textHover-content img-responsive img-circle text-center">
-            <span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
+          <span class="textHover-content img-circle img-responsive text-center">
+            <span class="text-center"><div class="text-center" ng-repeat="tag in media.tags"><a href="/#/collections/{{tag.length}}/{{tag}}" class="tagLink">#{{tag}}</a><br/></div></span>
           </span>
-        </a>          
-
+        </div>          
       </div>
     </div>
+
+
     <!-- ######### NG SHOW FOR PAGINATION ########### -->
     <div ng-show="!hashInfo"class="instaBoxContainer col-md-3" ng-repeat="media in filteredMedia">
   		<div class="instaBox text-center imgHover">
-
-        <!-- NG SHOW FOR IMG -->
-  			<a data-toggle="modal" data-target="#myModal" ng-show="!media.videos.standard_resolution.url">
-  				<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic" class="text-center">
-  				<span class="textHover-content img-circle img-responsive text-center">
-  					<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
-  				</span>
-  			</a>	
-
-        <!-- NG SHOW FOR VIDEO -->
-        <a data-toggle="modal" data-target="#myModal" ng-show="media.videos.standard_resolution.url">
-          <video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" controls class="img-responsive img-circle instaPic">
+  			<div data-toggle="modal" ng-click="setMedia($index)" data-target="#myModal" >
+  				<img src="{{media.images.standard_resolution.url}}" ng-show="!media.videos.standard_resolution.url" class="img-responsive img-circle instaPic" class="text-center">
+          <video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" ng-show="media.videos.standard_resolution.url" controls class="img-responsive img-circle instaPic">
           </video>
-
-          <span class="textHover-content img-responsive img-circle text-center">
-            <span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
-          </span>
-        </a>          
+  				<span class="textHover-content img-circle img-responsive text-center">
+  					<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags"><a href="/#/collections/{{tag.length}}/{{tag}}" class="tagLink">#{{tag}}</a><br/></div></span>
+  				</span>
+  			</div>	        
   		</div>
   	</div>
 
@@ -107,6 +90,66 @@
   		</div>
   	</div>
   	<div class="col-md-2"></div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close modalButton" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button><br/>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-8 noPad">
+              <img src="{{filteredMedia[index].images.standard_resolution.url}}" class="img-responsive" ng-show="!filteredMedia[index].videos.standard_resolution.url">
+              <video src="" dynamic-url dynamic-url-src="{{filteredMedia[index].videos.standard_resolution.url}}" controls class="img-responsive" ng-show="filteredMedia[index].videos.standard_resolution.url">
+              </video>
+            </div>
+            <div class="col-md-4 noPad modalSidebar">
+              <div class="col-md-12">
+                {{filteredMedia[index].caption.text}}<br/>
+                <div class="col-md-6 text-center">
+                  <h5>Comments:<br/> <strong>{{filteredMedia[index].comments.count}}</strong></h5>
+                </div>
+                <div class="col-md-6 text-center">
+                  <h5>Likes:<br/> <strong>{{filteredMedia[index].likes.count}}</strong></h5>
+                </div>
+                <div class="col-md-12 noPad" ng-repeat="comment in filteredMedia[index].comments.data">
+                <hr class="commentMarg">
+                  <div class="col-md-3 noPadLeft">
+                    <img src="{{comment.from.profile_picture}}" class="img-responsive">
+                  </div>
+                  <div class="col-md-9 noPad">
+                    <div class="col-md-12 noPad">
+                      <small><strong>{{comment.from.full_name}} @{{comment.from.username}}</strong></small>
+                    </div>
+                    <div class="col-md-12 noPad">
+                      <small>{{comment.created_time * 1000 | date: "EEE, MMM d '@' h:mm a"}}</small><hr class="commentMarg">
+                    </div>
+                  </div>
+                  <div class="col-md-12 noPad topBotPad">
+                    "{{comment.text}}"
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-2 text-left"></div>
+              <div class="col-md-4 text-center">
+                <h5><strong>{{filteredMedia[index].created_time * 1000 | date: "EEE, MMM d '@' h:mm a"}}</strong></h5>
+              </div>
+              <div class="col-md-2"></div>
+              <div class="col-md-4"></div>
+            </div>
+          </div>
+        </div>
+        <a ng-click="nextPage()" class="modalPageRight"><i class="fa fa-chevron-right fa-3x"></i></a>
+        <a ng-click="backPage()" class="modalPageLeft"><i class="fa fa-chevron-left fa-3x"></i></a>
+      </div>
+    </div>
   </div>
 </div>
 

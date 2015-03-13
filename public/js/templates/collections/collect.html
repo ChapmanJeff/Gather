@@ -8,7 +8,7 @@
 			<h4 style="text-decoration: underline">Collections</h4>
 			<ul class="collectionsList text-center">
 			  <li ng-repeat="collection in collections">
-					<a href="/#/collections/{{collection.name}}">#{{collection.name}}</a>
+					<a href="/#/collections/{{collection._id}}/{{collection.name}}">#{{collection.name}}</a><a ng-click="deleteCollection(collection._id)">&nbsp<i class="fa fa-trash-o fa-lg hoverIcon"></i></a>
 			  </li>
 			</ul>
 		</div>
@@ -20,30 +20,76 @@
 				<div class="col-md-4"></div>
 				<div class="col-md-4"><div class="text-center"><h2>#{{title}}</div></div>
 				<div class="col-md-4 text-center">
-					<h4><a href="/#/home" ng-click="deleteCollection()"><i class="fa fa-trash-o"></i>Coming Soon</a></h4>
 				</div>
 			</div>
 		</div><hr>
 		<div class="instaBoxContainer col-md-3" ng-repeat="media in populateCollection" >
 			<div class="instaBox text-center imgHover">
-				<!-- NG SHOW FOR IMG -->
-				<a data-toggle="modal" data-target="#myModal" ng-show="!media.videos.standard_resolution.url">
-					<img src="{{media.images.standard_resolution.url}}" class="img-responsive img-circle instaPic" class="text-center">
-					<span class="textHover-content img-circle img-responsive text-center">
-						<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
-					</span>
-				</a>	
-				<!-- NG SHOW FOR VIDEO -->
-				<a data-toggle="modal" data-target="#myModal" ng-show="media.videos.standard_resolution.url">
-					<video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" controls class="img-responsive img-circle instaPic">
+
+				<div data-toggle="modal" data-target="#myModal" ng-click="setMedia($index)">
+					<img src="{{media.images.standard_resolution.url}}" ng-show="!media.videos.standard_resolution.url" class="img-responsive img-circle instaPic" class="text-center"><video src="" dynamic-url dynamic-url-src="{{media.videos.standard_resolution.url}}" controls ng-show="media.videos.standard_resolution.url" class="img-responsive img-circle instaPic">
 					</video>
-					<span class="textHover-content img-responsive img-circle text-center">
-						<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags">#{{tag}}<br/></div></span>
+					<span class="textHover-content img-circle img-responsive text-center">
+						<span class="text-center"><div class="text-center" ng-repeat="tag in media.tags"><a href="/#/collections/{{tag.length}}/{{tag}}" class="tagLink">#{{tag}}</a><br/></div></span>
 					</span>
-				</a>	
+				</div>	
+
 			</div>
 		</div>
 	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-8 noPad">
+              <img src="{{populateCollection[index].images.standard_resolution.url}}" class="img-responsive" ng-show="!populateCollection[index].videos.standard_resolution.url">
+              <video src="" dynamic-url dynamic-url-src="{{populateCollection[index].videos.standard_resolution.url}}" controls class="img-responsive" ng-show="populateCollection[index].videos.standard_resolution.url">
+              </video>
+            </div>
+            <div class="col-md-4 noPad modalSidebar">
+              <div class="col-md-12">
+                <div class="col-md-12">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><br/>
+                  {{populateCollection[index].caption.text}}<br/>
+                  <div class="col-md-6 text-center"><h5>Comments:<br/> <strong>{{populateCollection[index].comments.count}}</strong></h5>
+                  </div>
+                  <div class="col-md-6 text-center"><h5>Likes:<br/> <strong>{{populateCollection[index].likes.count}}</strong></h5>
+              </div>
+                <div class="col-md-12 noPad" ng-repeat="comment in populateCollection[index].comments.data">
+                <hr class="commentMarg">
+                  <div class="col-md-3 noPadLeft">
+                    <img src="{{comment.from.profile_picture}}" class="img-responsive">
+                  </div>
+                  <div class="col-md-9 noPad">
+                    <div class="col-md-12 noPad">
+                      <small><strong>{{comment.from.full_name}} @{{comment.from.username}}</strong></small>
+                    </div>
+                    <div class="col-md-12 noPad">
+                      <small>{{comment.created_time * 1000 | date: "EEE, MMM d '@' h:mm a"}}</small><hr class="commentMarg">
+                    </div>
+                  </div>
+                  <div class="col-md-12 noPad topBotPad">
+                    "{{comment.text}}"
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="col-md-2 text-left"><a ng-click="backPage()"><i class="fa fa-chevron-left"></i></a></div>
+            <div class="col-md-4 text-center"><h5><strong>{{populateCollection[index].created_time * 1000 | date: "EEE, MMM d '@' h:mm a"}}</strong></h5></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4 text-right"><a ng-click="nextPage()"><i class="fa fa-chevron-right"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
