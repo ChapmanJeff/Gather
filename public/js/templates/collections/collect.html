@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-3 col-sm-3">
 		<div class="col-md-12 profileBox text-center">
 	  	<div class="profilePic"><img src="{{profile.profilePic}}" class="img-responsive img-thumbnail"></div>
 	  	<div class="userInfo"><h3>{{profile.name}}</h3></div><hr>
@@ -14,7 +14,7 @@
 		</div>
 		<div class="col-md-4"></div>
 	</div>
-	<div class="col-md-9">
+	<div class="col-md-9 col-sm-9">
 		<div class="row">
 			<div class-"col-md-12">
 				<div class="col-md-4"></div>
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 		</div><hr>
-		<div class="instaBoxContainer col-md-3" ng-repeat="media in populateCollection" >
+		<div class="instaBoxContainer col-md-3 col-sm-3 col-xs-6" ng-repeat="media in populateCollection" >
 			<div class="instaBox text-center imgHover">
 
 				<div data-toggle="modal" data-target="#myModal" ng-click="setMedia($index)">
@@ -44,6 +44,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-body">
+      	<button type="button" class="close modalButton modalClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-8 noPad">
@@ -53,13 +55,31 @@
             </div>
             <div class="col-md-4 noPad modalSidebar">
               <div class="col-md-12">
-                <div class="col-md-12">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><br/>
-                  {{populateCollection[index].caption.text}}<br/>
-                  <div class="col-md-6 text-center"><h5>Comments:<br/> <strong>{{populateCollection[index].comments.count}}</strong></h5>
+              	<div class="col-md-12 noPad">
+                  <hr class="commentMarg">
+                  <div class="col-md-9 noPad">
+                    <div class="col-md-12 noPad text-center">
+                      <small><strong>{{profile.name}} @{{profile.username}}</strong></small>
+                    </div>
+                    <div class="col-md-12 noPad text-center">
+                      <small>{{populateCollection[index].created_time * 1000 | date: "EEE, MMM d '@' h:mm a"}}</small>
+                    </div>
                   </div>
-                  <div class="col-md-6 text-center"><h5>Likes:<br/> <strong>{{populateCollection[index].likes.count}}</strong></h5>
-              </div>
+                  <div class="col-md-3 noPad">
+                    <img src="{{profile.profilePic}}" class="img-responsive">
+                  </div>
+                </div>
+                {{populateCollection[index].caption.text}}<br/>
+                <div class="col-md-6 text-center">
+                  <h5>Comments:<br/> <strong>{{populateCollection[index].comments.count}}</strong></h5>
+                </div>
+                <div class="col-md-6 text-center">
+                  <h5>Likes:<br/> <strong>{{populateCollection[index].likes.count}}</strong></h5>
+                </div>
+
+
+                <div class="col-md-12">
+                 
                 <div class="col-md-12 noPad" ng-repeat="comment in populateCollection[index].comments.data">
                 <hr class="commentMarg">
                   <div class="col-md-3 noPadLeft">
@@ -80,13 +100,9 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12">
-            <div class="col-md-2 text-left"><a ng-click="backPage()"><i class="fa fa-chevron-left"></i></a></div>
-            <div class="col-md-4 text-center"><h5><strong>{{populateCollection[index].created_time * 1000 | date: "EEE, MMM d '@' h:mm a"}}</strong></h5></div>
-            <div class="col-md-2"></div>
-            <div class="col-md-4 text-right"><a ng-click="nextPage()"><i class="fa fa-chevron-right"></i></a></div>
-          </div>
         </div>
+        <a ng-click="nextPage()" class="modalPageRight"><i class="fa fa-chevron-right fa-3x"></i></a>
+        <a ng-click="backPage()" class="modalPageLeft"><i class="fa fa-chevron-left fa-3x"></i></a>
       </div>
     </div>
   </div>

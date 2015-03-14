@@ -8,7 +8,7 @@
 			<h4 style="text-decoration: underline">Collections</h4>
 			<ul class="collectionsList text-center">
 			  <li ng-repeat="collection in collections">
-					<a href="/#/collections/{{collection._id}}/{{collection.name}}">#{{collection.name}}</a>
+					<a href="/#/collections/{{collection._id}}/{{collection.name}}">#{{collection.name}}</a><a ng-click="deleteCollection(collection._id)">&nbsp<i class="fa fa-trash-o fa-lg hoverIcon"></i></a>
 			  </li>
 			</ul>
 		</div>
@@ -21,9 +21,9 @@
 			  	<input type="text" placeholder="Enter Hashtag Name" class="form-control" id="inputDefault" ng-model="colName2">
 			  </form>
 			</div>
-			<div class="col-md-3" ng-repeat="collection in collections"><a href="/#/collections/{{collection._id}}/{{collection.name}}">
+			<div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="collection in collections"><a href="/#/collections/{{collection._id}}/{{collection.name}}">
 				<div class="collectionTitle text-center"><h3>#{{collection.name}}</h3></div>
-				<div class="collectionPreview text-center col-md-6" ng-repeat="image in collection.data | limitTo: 4">
+				<div class="collectionPreview text-center col-md-6 col-sm-6 col-xs-6" ng-repeat="image in collection.data | limitTo: 4">
 					<img src="{{image.images.standard_resolution.url}}" class="img-responsive">
 				</div></a>
 			</div>

@@ -28,9 +28,14 @@
         <li ng-show="profile"><a href="/#/home"><i class="fa fa-home fa-lg"></i></a></li>
         <li ng-show="profile"><a href="/#/collections">Collections</a></li>
       </ul>
+      <form ng-show="profile" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search for Friends">
+        </div>
+      </form>
       <ul class="nav navbar-nav navbar-right">
         <li ng-show="!gif && profile" class="text-center"><a><img src="../../gif/ajax-loader.gif">Updating Your Media</a></li>
-        <li><img src="{{profile.profilePic}}" ng-show="profile" class="profileDot img-responsive img-circle"></li>
+        <li><img src="{{profile.profilePic}}" ng-show="profile" class="profileDot img-circle"></li>
         <li><a href="/api/logout" ng-show="profile">Logout</a></li>
         <li><a href="/auth/instagram" ng-show="!profile">Login</a></li>
       </ul>

@@ -16,14 +16,14 @@
 	</div>
 </div>
 <div class="row">  
-  <div class="col-md-3">
+  <div class="col-md-3 col-sm-3 col-xs-12">
   	<div class="col-md-12 profileBox text-center">
   		<div class="profilePic"><img src="{{profile.profilePic}}" class="img-responsive img-thumbnail"></div>
   		<div class="userInfo"><h3>{{profile.name}}</h3></div>
-				<div class="col-md-12">
-	  			<div class="col-md-4 text-center"><h6>Followed</h6><h4>{{profile.followed_by}}</h4></div>
-	  			<div class="col-md-4 text-center"><h6>Follows</h6><h4>{{profile.follows}}</h4></div>
-	  			<div class="col-md-4 text-center"><h6>Posts</h6><h4>{{profile.posts}}</h4></div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+	  			<div class="col-md-4 col-sm-4 col-xs-4 text-center"><h6>Followed</h6><h4>{{profile.followed_by}}</h4></div>
+	  			<div class="col-md-4 col-sm-4 col-xs-4 text-center"><h6>Follows</h6><h4>{{profile.follows}}</h4></div>
+	  			<div class="col-md-4 col-sm-4 col-xs-4 text-center"><h6>Posts</h6><h4>{{profile.posts}}</h4></div>
   			</div>
   			<div class="col-md-12 text-center"><h5>{{profile.bio}}</h5><hr></div>
   			<div class="col-md-12 text-center">
@@ -42,11 +42,11 @@
   			</div>
   	</div>
   </div>
-  <div class="col-md-9 addShadow">
 
+  <div class="col-md-9 col-sm-9 col-xs-12 addShadow">
 
   <!-- ########### NG SHOW FOR SEARCH BAR ############ -->
-  	<div ng-show="hashInfo" class="instaBoxContainer col-md-3" ng-repeat="media in allMedia | filter: hashInfo" >
+  	<div ng-show="hashInfo" class="instaBoxContainer col-md-3 col-sm-3 col-xs-12" ng-repeat="media in allMedia | filter: hashInfo" >
       <div class="instaBox text-center imgHover">
         <div data-toggle="modal" ng-click="setMedia($index)" data-target="#myModal" ng-show="!media.videos.standard_resolution.url">
           <img src="{{media.images.standard_resolution.url}}" ng-show="!media.videos.standard_resolution.url" class="img-responsive img-circle instaPic" class="text-center">
@@ -61,7 +61,7 @@
 
 
     <!-- ######### NG SHOW FOR PAGINATION ########### -->
-    <div ng-show="!hashInfo"class="instaBoxContainer col-md-3" ng-repeat="media in filteredMedia">
+    <div ng-show="!hashInfo"class="instaBoxContainer col-md-3 col-sm-3 col-xs-12" ng-repeat="media in filteredMedia">
   		<div class="instaBox text-center imgHover">
   			<div data-toggle="modal" ng-click="setMedia($index)" data-target="#myModal" >
   				<img src="{{media.images.standard_resolution.url}}" ng-show="!media.videos.standard_resolution.url" class="img-responsive img-circle instaPic" class="text-center">
@@ -99,8 +99,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-body">
-        <button type="button" class="close modalButton" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-        </button><br/>
+        <button type="button" class="close modalButton modalClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times fa-lg"></i></span>
+        </button>
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-8 noPad">
@@ -110,6 +110,20 @@
             </div>
             <div class="col-md-4 noPad modalSidebar">
               <div class="col-md-12">
+                <div class="col-md-12 noPad">
+                  <hr class="commentMarg">
+                  <div class="col-md-9 noPad">
+                    <div class="col-md-12 noPad text-center">
+                      <small><strong>{{profile.name}} @{{profile.username}}</strong></small>
+                    </div>
+                    <div class="col-md-12 noPad text-center">
+                      <small>{{filteredMedia[index].created_time * 1000 | date: "EEE, MMM d '@' h:mm a"}}</small>
+                    </div>
+                  </div>
+                  <div class="col-md-3 noPad">
+                    <img src="{{profile.profilePic}}" class="img-responsive">
+                  </div>
+                </div>
                 {{filteredMedia[index].caption.text}}<br/>
                 <div class="col-md-6 text-center">
                   <h5>Comments:<br/> <strong>{{filteredMedia[index].comments.count}}</strong></h5>
@@ -135,14 +149,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-12">
-              <div class="col-md-2 text-left"></div>
-              <div class="col-md-4 text-center">
-                <h5><strong>{{filteredMedia[index].created_time * 1000 | date: "EEE, MMM d '@' h:mm a"}}</strong></h5>
-              </div>
-              <div class="col-md-2"></div>
-              <div class="col-md-4"></div>
             </div>
           </div>
         </div>
